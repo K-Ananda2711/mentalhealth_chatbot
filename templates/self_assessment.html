@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Mental Health Self-Assessment</h1>
+        <nav>
+            <a href="{{ url_for('chat') }}">Chat</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            {% if feedback %}
+                <div class="feedback-section">
+                    <h3>Your Score: {{ score }}</h3>
+                    <p>{{ feedback }}</p>
+                    <a href="{{ url_for('self_assessment') }}" class="restart-btn">Restart Assessment</a>
+                </div>
+            {% else %}
+                <form method="POST" class="assessment-form">
+                    <p class="question-count">Question {{ question_index + 1 }} of {{ total_questions }}</p>
+                    <p class="question-text">{{ question }}</p>
+
+                    {% if options %}
+                        <div class="options">
+                            {% for option in options %}
+                                <label>
+                                    <input type="radio" name="answer" value="{{ option }}" required
+                                    {% if session['answers'][question_index] == option %}checked{% endif %}>
+                                    {{ option }}
+                                </label><br>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <input type="hidden" name="question_index" value="{{ question_index }}">
+                    <div class="navigation-buttons">
+                        {% if question_index > 0 %}
+                            <button type="submit" name="back" class="btn">Back</button>
+                        {% endif %}
+                        {% if question_index < total_questions - 1 %}
+                            <button type="submit" name="next" class="btn">Next</button>
+                        {% else %}
+                            <button type="submit" name="submit" class="btn submit-btn">Submit</button>
+                        {% endif %}
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </main>
+
+    <style>
+        /* Global styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background-color: #f4f6f8; color: #333; }
+        
+        /* Header styling */
+        header { background-color: #4CAF50; color: #fff; padding: 10px 20px; text-align: center; position: sticky; top: 0; }
+        header h1 { font-size: 1.5em; margin-bottom: 5px; }
+        nav { margin-top: 5px; }
+        nav a { color: #fff; text-decoration: none; padding: 8px 12px; background-color: #333; border-radius: 4px; }
+        nav a:hover { background-color: #555; }
+
+        /* Main content styling */
+        main { padding: 20px; display: flex; justify-content: center; }
+        .container { background-color: #fff; padding: 20px 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 500px; width: 100%; }
+        
+        /* Form styling */
+        .assessment-form { display: flex; flex-direction: column; gap: 15px; }
+        .question-count { font-size: 1.1em; color: #555; margin-bottom: 10px; }
+        .question-text { font-size: 1.25em; color: #333; margin-bottom: 15px; }
+        
+        /* Option styling */
+        .options label { display: block; padding: 8px 12px; background-color: #e0e0e0; border-radius: 6px; margin-bottom: 8px; cursor: pointer; }
+        .options label:hover { background-color: #d0d0d0; }
+        .options input[type="radio"] { margin-right: 10px; }
+
+        /* Button styling */
+        .navigation-buttons { display: flex; justify-content: space-between; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; }
+        .btn:hover { background-color: #4CAF50; color: #fff; }
+        .submit-btn { background-color: #4CAF50; color: #fff; }
+        .restart-btn { margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: #fff; border-radius: 5px; text-decoration: none; display: inline-block; text-align: center; }
+
+        /* Feedback section styling */
+        .feedback-section { text-align: center; }
+        .feedback-section h3 { font-size: 1.5em; color: #333; margin-bottom: 10px; }
+        .feedback-section p { font-size: 1.1em; color: #666; margin-bottom: 20px; }
+    </style>
+</body>
+</html>

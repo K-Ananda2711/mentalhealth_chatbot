@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif; /* Changed to Poppins font */
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 30px 20px; /* Added extra padding for smaller screens */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .thank-you-icon {
+            font-size: 50px;
+            color: #28a745;
+            animation: pop 0.5s ease; /* Added animation */
+        }
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        h1 {
+            color: #343a40;
+        }
+        .back-button {
+            margin-top: 20px;
+            transition: background-color 0.3s ease; /* Added transition for button */
+        }
+        .back-button:hover {
+            background-color: #218838; /* Changed background color on hover */
+        }
+    </style>
+    <title>Thank You!</title>
+</head>
+<body>
+
+<div class="container text-center">
+    <i class="fas fa-check-circle thank-you-icon"></i>
+    <h1>Thank You for Your Feedback!</h1>
+    <p>Your feedback is valuable to us and will help us improve our services.</p>
+    <a href="{{ url_for('chat') }}" class="btn btn-primary back-button">Go Back to Chat</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

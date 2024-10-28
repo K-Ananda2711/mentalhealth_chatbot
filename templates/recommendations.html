@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Recommendations</title>
+</head>
+<body class="bg-light text-dark">
+    <div class="container mt-5">
+        <h1>Recommendations</h1>
+        <ul class="list-group">
+            {% for recommendation in recommendations %}
+                <li class="list-group-item">{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('chat') }}" class="btn btn-secondary mt-3">Go Back to Chat</a>
+    </div>
+</body>
+</html>

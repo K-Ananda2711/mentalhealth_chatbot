@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Modules</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light text-dark">
+    <div class="container mt-5">
+        <h1 class="text-center">Educational Modules</h1>
+
+        <div class="text-center mb-4">
+            <a href="{{ url_for('chat') }}" class="btn btn-secondary">Go to Chat</a>
+        </div>
+
+        <div class="text-center mb-4">
+            <h3>Select a Topic:</h3>
+            <form method="POST">
+                <button type="submit" name="topic" value="Stress Management" class="btn btn-primary m-2">Stress Management</button>
+                <button type="submit" name="topic" value="Anxiety Relief" class="btn btn-primary m-2">Anxiety Relief</button>
+                <button type="submit" name="topic" value="Mindfulness" class="btn btn-primary m-2">Mindfulness</button>
+                <button type="submit" name="topic" value="Self-Care" class="btn btn-primary m-2">Self-Care</button>
+                <!-- Add more buttons as needed -->
+            </form>
+        </div>
+
+        {% if module_content %}
+            <div>
+                <h2>Module for {{ topic }}</h2>
+                <p>{{ module_content|replace('\n', '<br>')|safe }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

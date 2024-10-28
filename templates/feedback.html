@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="/static/styles.css"> <!-- Link to your external CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .navbar h1 {
+            color: white;
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: vertical;
+            height: 120px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            font-size: 24px;
+        }
+
+        .star {
+            cursor: pointer;
+            color: #ddd;
+        }
+
+        .star.selected {
+            color: #FFD700;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Mental Health Chatbot Feedback</h1>
+    </div>
+
+    <div class="container">
+        <h1>Submit Your Feedback</h1>
+        <form action="{{ url_for('submit_feedback') }}" method="POST">
+            <label for="rating">Rating:</label>
+            <div class="star-rating" id="starRating">
+                <i class="star fas fa-star" data-value="1"></i>
+                <i class="star fas fa-star" data-value="2"></i>
+                <i class="star fas fa-star" data-value="3"></i>
+                <i class="star fas fa-star" data-value="4"></i>
+                <i class="star fas fa-star" data-value="5"></i>
+            </div>
+            <input type="hidden" id="rating" name="rating" value="">
+
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments" placeholder="Your feedback..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for your feedback!</p>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                let ratingValue = star.getAttribute('data-value');
+                ratingInput.value = ratingValue;
+
+                // Reset all stars
+                stars.forEach(s => s.classList.remove('selected'));
+
+                // Highlight selected stars
+                for (let i = 0; i < ratingValue; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

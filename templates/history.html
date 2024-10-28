@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query History</title>
+</head>
+<body>
+    <h1>Query History</h1>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Query</th>
+            <th>Response</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for query in queries %}
+        <tr>
+            <td>{{ query.query_text }}</td>
+            <td>{{ query.response_text }}</td>
+            <td>{{ query.timestamp }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>
